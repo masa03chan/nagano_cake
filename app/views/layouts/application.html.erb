@@ -10,7 +10,104 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="d-flex flex-column vh-100">
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+          <a class="navbar-brand" href="/home">LOGO</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="#navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+              <% if customer_signed_in? %>
+                <li class="nav-link text-light">
+                  <%= link_to customer_path(current_customers), class: "header-button" do %>
+                    <button type="button" class="btn btn-outline-secondary">マイページ</button>
+                  <% end %>
+                </li>
+                <li class="nav-link text-light">
+                  <%= link_to customer_items_path, class: "header-button" do %>
+                    <button type="button" class="btn btn-outline-secondary">商品一覧</button>
+                  <% end %>
+                </li>
+                <li class="nav-link text-light">
+                  <%= link_to cart_items_path, class: "header-button" do %>
+                    <button type="button" class="btn btn-outline-secondary">カート</button>
+                  <% end %>
+                </li>
+                <li class="nav-link text-light">
+                  <%= link_to destroy_customer_session_path, method: :delete, class: "header-button" do %>
+                    <button type="button" class="btn btn-outline-secondary">ログアウト</button>
+                  <% end %>
+                </li>
+              <% elsif admin_signed_in? %>
+                <li class="nav-link text-light">
+                  <%= link_to admin_items_path, class: "header-button" do %>
+                    <button type="button" class="btn btn-outline-secondary">商品一覧</button>
+                  <% end %>
+                </li>
+                <li class="nav-link text-light">
+                  <%= link_to admin_customers_path, class: "header-button" do %>
+                    <button type="button" class="btn btn-outline-secondary">会員一覧</button>
+                  <% end %>
+                </li>
+                <li class="nav-link text-light">
+                  <%= link_to admin_orders_path, class: "header-button" do %>
+                    <button type="button" class="btn btn-outline-secondary">注文履歴一覧</button>
+                  <% end %>
+                </li>
+                <li class="nav-link text-light">
+                  <%= link_to admin_genres_path, class: "header-button" do %>
+                    <button type="button" class="btn btn-outline-secondary">注文履歴一覧</button>
+                  <% end %>
+                </li>
+                <li class="nav-link text-light">
+                  <%= link_to destroy_admin_session_path, method: :delete, class: "header-button" do %>
+                    <button type="button" class="btn btn-outline-secondary">ログアウト</button>
+                  <% end %>
+                </li>
+              <% else %>
+                <li class="nav-link text-light">
+                  <%= link_to about_path, class: "header-button" do %>
+                    <button type="button" class="btn btn-outline-secondary">About</button>
+                  <% end %>
+                </li>
+                <li class="nav-link text-light">
+                  <%= link_to public_items_path, class: "header-button" do %>
+                    <button type="button" class="btn btn-outline-secondary">商品一覧</button>
+                  <% end %>
+                </li>
+                <li class="nav-link text-light">
+                  <%= link_to new_customer_registration_path, class: "header-button" do %>
+                    <button type="button" class="btn btn-outline-secondary">新規登録</button>
+                  <% end %>
+                </li>
+                <li class="nav-link text-light">
+                  <%= link_to new_customer_session_path, class: "header-button" do %>
+                    <button type="button" class="btn btn-outline-secondary">ログイン</button>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+            <form class="form-inline">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            </form>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
     <%= yield %>
+    </main>
+    <footer>
+      <div class="container mt-5">
+        <div class="row">
+          <div class="mx-auto">
+
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
