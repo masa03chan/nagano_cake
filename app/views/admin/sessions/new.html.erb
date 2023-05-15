@@ -1,24 +1,35 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-12 col-md-6 col-lg-4 px-5 px-sm-0">
-      <h4>管理者ログイン</h4>
+    <div class="col-sm-12">
+      <h5 class="d-inline-block bg-light col-sm-3 px-auto my-4 ">管理者ログイン</h5>
     </div>
   </div>
   <div class="row justify-content-around">
     <div class="col-sm-12 col-md-10 col-lg-8 mx-auto p-sm-0">
       <%= form_with model: @admin, url: admin_session_path do |f| %>
-        <div class="form-group">
-          <%= f.label :email do %>メールアドレス<% end %>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com", class: "border border-secondary rounded" %>
+        <div class="form-group row">
+          <div class="col-sm-3 col-form-label">
+            <%= f.label :email do %>メールアドレス<% end %>
+          </div>
+          <div class="col-sm-9">
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com", class: "form-control border border-secondary rounded" %>
+          </div>
         </div>
 
-        <div class="form-group">
-          <%= f.label :password do %>パスワード<% end %>
-          <%= f.password_field :password, autocomplete: "current-password" %>
+        <div class="form-group row">
+          <div class="col-sm-3 col-form-label">
+            <%= f.label :password do %>パスワード<% end %>
+          </div>
+          <div class="col-sm-9">
+            <%= f.password_field :password, autocomplete: "current-password", class: "form-control border border-secondary rounded" %>
+          </div>
         </div>
-
-        <div class="actions">
-          <%= f.submit "ログイン", class: "btn btn-primary" %>
+        <div class="form-group row mt-10">
+          <div class="col-sm-3"></div>
+          <div class="actions col-sm-3  col-form-label">
+            <%= f.submit "ログイン", class: "btn btn-primary btn-block" %>
+          </div>
+          <div class="col-sm-6"></div>
         </div>
       <% end %>
 
