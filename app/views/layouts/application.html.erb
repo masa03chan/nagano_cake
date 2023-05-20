@@ -20,7 +20,7 @@
           </button>
           <div class="row">
             <div class="collapse navbar-collapse " id="navbarNavDropdown">
-              <ul class="navbar-nav ml-auto justify-content-end col-sm">
+              <ul class="navbar-nav ml-auto justify-content-end col-lg">
                 <% if customer_signed_in? %>
                   <li class="nav-link text-light">
                     <%= link_to customer_path(current_customers), class: "header-button" do %>
@@ -54,13 +54,13 @@
                     <% end %>
                   </li>
                   <li class="nav-link text-light">
-                    <%= link_to admin_orders_path, class: "header-button" do %>
+                    <%= link_to admin_admin_path, class: "header-button" do %>
                       <button type="button" class="btn btn-outline-secondary">注文履歴一覧</button>
                     <% end %>
                   </li>
                   <li class="nav-link text-light">
                     <%= link_to admin_genres_path, class: "header-button" do %>
-                      <button type="button" class="btn btn-outline-secondary">注文履歴一覧</button>
+                      <button type="button" class="btn btn-outline-secondary">ジャンル一覧</button>
                     <% end %>
                   </li>
                   <li class="nav-link text-light">
@@ -70,7 +70,7 @@
                   </li>
                 <% else %>
                   <li class="nav-link text-light">
-                    <%= link_to about_path, class: "header-button" do %>
+                    <%= link_to public_about_path, class: "header-button" do %>
                       <button type="button" class="btn btn-outline-secondary">About</button>
                     <% end %>
                   </li>

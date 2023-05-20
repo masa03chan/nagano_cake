@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :public do
+    root to: "homes#top"
+    get "about" => "homes#about", as: "about"
+  end
   namespace :admin do
     resources :genres, only: [:index, :create, :edit, :update]
   end
@@ -30,10 +34,9 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :show]
   end
   namespace :admin do
-    get 'homes/top' => 'admin/homes#top', as: "admin"
+    root to: 'homes#top', as: 'admin'
   end
-  root to: "admin/homes#top"
-  get "home/about" => "admin/homes#about", as: "about"
+  
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     sessions: "admin/sessions"
   }
