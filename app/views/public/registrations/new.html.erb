@@ -1,35 +1,61 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0">
-      <h2>Sign up</h2>
-      
+    <div class="col-sm-12">
+      <h5 class="d-inline-block bg-light col-3 my-4 text-center text-nowrap">新規会員登録</h5>
+    </div>
+  </div>
+  <div class="row justify-content-around">
+    <div class="col-sm-12 col-md-10 col-lg-8 mx-auto p-sm-0">
       <%= form_with model: @public, url: customer_registration_path do |f| %>
-        <%= render "public/shared/error_messages", resource: resource %>
-      
-        <div class="field">
-          <%= f.label :email %><br />
-          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <%= render "public/shared/error_messages", resource: resource %>
+        <div class="form-group row">
+          <div class="col-sm-4 col-form-label">
+            <%= f.label :email do %>メールアドレス<% end %>
+          </div>
+          <div class="col-sm-4">
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com", class: "form-control border border-secondary rounded" %>
+          </div>
+          <div class="col-sm-4"></div>
         </div>
-      
-        <div class="field">
-          <%= f.label :password %>
-          <% if @minimum_password_length %>
-          <em>(<%= @minimum_password_length %> characters minimum)</em>
-          <% end %><br />
-          <%= f.password_field :password, autocomplete: "new-password" %>
+        <div class="form-group row">
+          <div class="col-sm-4 col-form-label">
+            <%= f.label :password do %>パスワード<% end %>
+            <% if @minimum_password_length %>
+            <rem>(<%= @minimum_password_length %> 文字以上)</rem>
+            <% end %>
+          </div>
+          <div class="col-sm-4">
+            <%= f.password_field :password, class: "form-control border border-secondary rounded" %>
+          </div>
+        </div>  
+        <div class="form-group row">
+          <div class="col-sm-4 col-form-label">
+            <%= f.label :password_confirmation do %>パスワード(確認用)<% end %>
+          </div>
+          <div class="col-sm-4 col-form-label">
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control border border-secondary rounded" %>
+          </div>
         </div>
-      
-        <div class="field">
-          <%= f.label :password_confirmation %><br />
-          <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-        </div>
-      
-        <div class="actions">
-          <%= f.submit "Sign up" %>
+        <div class="form-group row">
+          <div class="col-sm-4"></div>
+          <div class="actions col-sm-3  col-form-label">
+            <%= f.submit "新規登録", class: "btn btn-success btn-block" %>
+          </div>
         </div>
       <% end %>
       
-      <%= render "public/shared/links" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <h5 class="d-inline-block bg-light col-3 my-4 text-center text-nowrap">既に登録済みの方</h5>
+      <div class="col-2"></div>
+      <div class="col-6 text-nowrap ">
+        <p>
+          <%= link_to new_customer_session_path, class: "text-underline-primary" do %>こちら<% end %>
+        からログインしてください。
+        </p>
+      </div>
     </div>
   </div>
 </div>
