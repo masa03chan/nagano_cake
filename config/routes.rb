@@ -13,7 +13,9 @@ Rails.application.routes.draw do
     resources :orders, only: [:show, :update]
   end
   namespace :public do
-    resources :customers, only: [:show, :edit, :update]
+    get "/customers/mypage" => "customers#show", as: "customer"
+    get "/customers/infomation/edit" => "customers#edit", as: "edit_public_customer"
+    patch "/customers" => "customers#update", as: "update_public_customer"
   end
   namespace :admin do
     resources :customers, only: [:index, :show, :edit, :update]
@@ -36,7 +38,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'homes#top', as: 'admin'
   end
-  
+
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     sessions: "admin/sessions"
   }
