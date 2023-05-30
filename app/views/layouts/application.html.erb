@@ -23,17 +23,17 @@
               <ul class="navbar-nav ml-auto justify-content-end col-lg">
                 <% if customer_signed_in? %>
                   <li class="nav-link text-light">
-                    <%= link_to public_customer_path, class: "header-button" do %>
+                    <%= link_to customer_path, class: "header-button" do %>
                       <button type="button" class="btn btn-outline-secondary">マイページ</button>
                     <% end %>
                   </li>
                   <li class="nav-link text-light">
-                    <%= link_to public_items_path, class: "header-button" do %>
+                    <%= link_to items_path, class: "header-button" do %>
                       <button type="button" class="btn btn-outline-secondary">商品一覧</button>
                     <% end %>
                   </li>
                   <li class="nav-link text-light">
-                    <%= link_to public_cart_items_path, class: "header-button" do %>
+                    <%= link_to cart_items_path, class: "header-button" do %>
                       <button type="button" class="btn btn-outline-secondary">カート</button>
                     <% end %>
                   </li>
@@ -54,7 +54,7 @@
                     <% end %>
                   </li>
                   <li class="nav-link text-light">
-                    <%= link_to admin_admin_path, class: "header-button" do %>
+                    <%= link_to admin_root_path, class: "header-button" do %>
                       <button type="button" class="btn btn-outline-secondary">注文履歴一覧</button>
                     <% end %>
                   </li>
@@ -70,12 +70,12 @@
                   </li>
                 <% else %>
                   <li class="nav-link text-light">
-                    <%= link_to public_about_path, class: "header-button" do %>
+                    <%= link_to about_path, class: "header-button" do %>
                       <button type="button" class="btn btn-outline-secondary">About</button>
                     <% end %>
                   </li>
                   <li class="nav-link text-light">
-                    <%= link_to public_items_path, class: "header-button" do %>
+                    <%= link_to items_path, class: "header-button" do %>
                       <button type="button" class="btn btn-outline-secondary">商品一覧</button>
                     <% end %>
                   </li>

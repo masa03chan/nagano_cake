@@ -1,2 +1,54 @@
-<h1>Public::Customers#show</h1>
-<p>Find me in app/views/public/customers/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12 p-0">
+      <h5 class="d-inline-block bg-light col-2 text-center my-4 text-nowrap">マイページ</h5>
+    </div>
+  </div>
+  <div class="col-md-7 col-sm my-3 justify-content-around">
+    <h5 class="d-inline-block col-sm-3 font-weight-bold text-nowrap">登録情報</h5>
+    <%= link_to edit_public_customer_path ,class: "col-sm-3 btn btn-success text-nowrap", role: "button" do %>編集する<% end %>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <table class="table table-border">
+          <tbody>
+            <tr>
+              <td class="col-2 bg-light">氏名</td>
+              <td class="col-4"><%= @customer.first_name %> <%= @customer.last_name %></td>
+            </tr>
+            <tr>
+              <td class="col-2 bg-light">カナ</td>
+              <td class="col-4"><%= @customer.first_name_kana %> <%= @customer.last_name_kana %></td>
+            </tr>
+              <td class="col-2 bg-light">郵便番号</td>
+              <td class="col-4"><%= @customer.postal_code %></td>
+            </tr>
+            </tr>
+              <td class="col-2 bg-light">住所</td>
+              <td class="col-4"><%= @customer.address %></td>
+            </tr>
+            </tr>
+              <td class="col-2 bg-light">電話番号</td>
+              <td class="col-4"><%= @customer.telephone_number %></td>
+            </tr>
+            </tr>
+              <td class="col-2 bg-light text-nowrap">メールアドレス</td>
+              <td class="col-4"><%= @customer.email %></td>
+            </tr>
+          </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-7 col-sm my-3 justify-content-around">
+      <h5 class="d-inline-block col-3 font-weight-bold text-nowrap">配送先</h5>
+      <%= link_to addresses_path ,class: "col-md-4 col-sm-3 btn btn-primary  text-nowrap" do %>一覧を見る<% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-7 col-sm my-3 justify-content-around">
+      <h5 class="d-inline-block col-3 font-weight-bold text-nowrap">注文履歴</h5>
+      <%= link_to orders_path ,class: "col-md-4 col-sm-3 btn btn-primary  text-nowrap" do %>一覧を見る<% end %>
+    </div>
+  </div>
+</div>

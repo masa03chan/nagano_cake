@@ -38,7 +38,7 @@
         
         <div class="form-group row">
           <div class="col-3 col-form-label">
-            <%= f.label :email do %>メールアドレス<% end %>
+            <%= f.label :email, class: "text-nowrap" do %>メールアドレス<% end %>
           </div>
           <div class="mr-5"></div>
           <div class="col-3">
@@ -48,7 +48,7 @@
         
         <div class="form-group row">
           <div class="col-3 col-form-label">
-            <%= f.label :postal_code do %>郵便番号(ハイフンなし)<% end %>
+            <%= f.label :postal_code, class: "text-nowrap" do %>郵便番号(ハイフンなし)<% end %>
           </div>
           <div class="mr-5"></div>
           <div class="col-3">
@@ -68,7 +68,7 @@
         
         <div class="form-group row">
           <div class="col-3 col-form-label">
-            <%= f.label :telephone_number do %>電話番号(ハイフンなし)<% end %>
+            <%= f.label :telephone_number, class: "text-nowrap" do %>電話番号(ハイフンなし)<% end %>
           </div>
           <div class="mr-5"></div>
           <div class="col-3">
@@ -77,7 +77,7 @@
         </div>
         
         <div class="form-group row">
-          <div class="col-3 col-form-label">
+          <div class="col-3 col-form-label text-nowrap">
             <%= f.label :password do %>パスワード<% end %>
             <% if @minimum_password_length %>
             <rem>(<%= @minimum_password_length %> 文字以上)</rem>
@@ -91,7 +91,7 @@
         
         <div class="form-group row">
           <div class="col-3 col-form-label">
-            <%= f.label :password_confirmation do %>パスワード(確認用)<% end %>
+            <%= f.label :password_confirmation, class: "text-nowrap" do %>パスワード(確認用)<% end %>
           </div>
           <div class="mr-5"></div>
           <div class="col-3 col-form-label">

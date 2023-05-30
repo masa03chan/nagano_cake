@@ -1,26 +1,50 @@
-<h2>Log in</h2>
-
-<%= form_with model: @public, url: customer_session_path do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<div class="container">
+  <div class="row">
+    <div class="col-12 p-0">
+      <h5 class="d-inline-block bg-light col-2 text-center my-4 text-nowrap">ログイン</h5>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
+  <div class="row">
+    <div class="col-sm-12 mx-auto justify-content-center">
+      <h6 class="d-inline-block bg-light col-5 my-4 text-center text-nowrap row">会員の方はこちらからログイン</h6>
+      <%= form_with model: @customer, url: customer_session_path do |f| %>
+        <div class="form-group row justify-content-center">
+          <div class="col-3 col-form-label ">
+            <%= f.label :email, class: "text-nowrap" do %>メールアドレス<% end %>
+          </div>
+          <div class="col-6">
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com", class: "form-control border border-secondary rounded" %>
+          </div>
+        </div>
 
-<%= render "public/shared/links" %>
+        <div class="form-group row justify-content-center">
+          <div class="col-3 col-form-label text-nowrap">
+            <%= f.label :password do %>パスワード<% end %>
+          </div>
+          <div class="col-6">
+            <%= f.password_field :password, autocomplete: "current-password", class: "form-control border border-secondary rounded" %>
+          </div>
+        </div>
+
+        <div class="form-group row mt-10 justify-content-center">
+          <div class="col-3"></div>
+          <div class="actions col-sm-3  col-form-label">
+            <%= f.submit "ログイン", class: "btn btn-primary btn-block" %>
+          </div>
+          <div class="col-3"></div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <h6 class="d-inline-block bg-light col-3 my-4 text-center text-nowrap">会員登録がお済みでない方</h6>
+  <dl class="row">
+    <dt class="col-2"></dt>
+    <dd class="col-3 text-nowrap ">
+      <p>
+        <%= link_to new_customer_registration_path, class: "text-underline-primary text-align-center" do %>こちら<% end %>
+      から新規登録を行ってください。
+      </p>
+      <dd class="col-2"></dd>
+    </dd>
+  </dl>
+</div>
