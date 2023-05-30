@@ -26,6 +26,7 @@ class Public::CustomersController < ApplicationController
     @customer = Customer.find_by(email: params[:customer][:email])
     @customer.update(is_valid: true)
     reset_session
+    flash[:notice] = "退会処理を実行いたしました。"
     redirect_to public_root_path
   end
     
