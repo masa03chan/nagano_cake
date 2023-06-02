@@ -92,9 +92,12 @@
                 <% end %>
               </ul>
             </div>
-            <div class="input-group row justify-content-end .align-items-end">
-              <div class="col-sm-3"><%= flash[:notice] %></div>
-              <input type="form-control input-group-prepend col-sm-3" type="search" id="txt-search" placeholder="Search" aria-label="Search">
+            <div class="input-group row justify-content-end ">
+              <% if customer_signed_in? %>
+                <div class="col-sm-3"><p class="text-left text-nowrap">ようこそ、<%= @customer.first_name %>さん！</p></div>
+              <% end %>
+              <div class="col"></div>
+              <input type="form-control input-group-prepend col-sm-3 text-right" type="search" id="txt-search" placeholder="Search" aria-label="Search">
                 <span class="input-group-btn input-group-append">
                   <submit type="submit" id="btn-search" class="btn btn-outline-secondary"><i class="fas fa-search"></i></submit>
                 </span>
