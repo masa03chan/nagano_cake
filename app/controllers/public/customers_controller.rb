@@ -1,7 +1,6 @@
 class Public::CustomersController < ApplicationController
   def show
     @customer = Customer.find(current_customer.id)
-
   end
 
   def edit
@@ -11,14 +10,14 @@ class Public::CustomersController < ApplicationController
   def update
     @customer = Customer.find(current_customer.id)
     if @customer.update(customer_params)
-      redirect_to customer_path(@customer)
+      redirect_to customer_path(current_customer.id)
     else
       render :edit
     end
   end
 
   def delete_confirm
-
+    @customer = Customer.find(current_customer.id)
   end
 
   def delete

@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     get "about" => "homes#about", as: "about"
     get "/customers/mypage" => "customers#show", as: "customer"
     get "/customers/infomation/edit" => "customers#edit", as: "edit_public_customer"
-    patch "/customers" => "customers#update", as: "update_public_customer"
+    patch "/customers/infomation" => "customers#update", as: "update_public_customer"
     get "/customers/delete_confirm" => "customers#delete_confirm"
     patch "/customers/delete" => "customers#delete_process"
     resources :addresses, except: [:new, :show]
