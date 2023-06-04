@@ -1,2 +1,24 @@
-<h1>Admin::Genres#index</h1>
-<p>Find me in app/views/admin/genres/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12 p-0">
+      <h5 class="d-inline-block bg-light col-2 text-center my-5 text-nowrap">ジャンル一覧・追加</h5>
+    </div>
+  </div>
+  <div class="row justify-content-around">
+    <div class="col-sm-12 p-0">
+      <%= form_with model: @genre, url: admin_genres_path do |f| %>
+        <div class="form-group row">
+          <div class="col-2 col-form-label">
+            <%= f.label :name, class: "font-weight-bold text-nowrap" do %>ジャンル名<% end %>
+          </div>
+          <div class="col-3 mr-4 col-form-label">
+            <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "ジャンル名", class: "form-control border border-secondary" %>
+          </div>
+          <div class="actions col-2 col-form-label">
+            <%= f.submit "新規登録", class: "btn btn-success btn-block" %>
+          </div>
+        </div>      
+      <% end %>
+    </div>
+  </div>
+</div>
