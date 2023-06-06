@@ -1,3 +1,6 @@
+<div>
+  <%= flash[:notice] %>
+</div>
 <div class="container">
   <div class="row">
     <div class="col-12 p-0">
@@ -5,6 +8,9 @@
     </div>
   </div>
   <div class="row justify-content-around">
+    <% if @genre.errors.any? %>
+      <P>空欄では保存できません。</P>
+    <% end %>
     <div class="col-sm-12 p-0">
       <%= form_with model: @genre, url: admin_genres_path do |f| %>
         <div class="form-group row">

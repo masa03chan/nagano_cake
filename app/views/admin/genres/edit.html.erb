@@ -1,2 +1,30 @@
-<h1>Admin::Genres#edit</h1>
-<p>Find me in app/views/admin/genres/edit.html.erb</p>
+<div>
+  <%= flash[:notice] %>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-12 p-0">
+      <h5 class="d-inline-block bg-light col-2 text-center my-5 text-nowrap">ジャンル編集</h5>
+    </div>
+  </div>
+  <div class="row justify-content-around">
+    <% if @genre.errors.any? %>
+      <P>空欄では保存できません。</P>
+    <% end %>
+    <div class="col-sm-12 p-0">
+      <%= form_with model: @genre, url: admin_genre_path(@genre.id), method: :patch do |f| %>
+        <div class="form-group row">
+          <div class="col-2 form-inline">
+            <label for="name">ジャンル名</label>
+          </div>
+          <div class="col-3 mr-2">
+            <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control border border-secondary rounded" %>
+          </div>
+          <div class="col-2">
+            <%= f.submit "変更を保存", class: "btn btn-success btn-block" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
