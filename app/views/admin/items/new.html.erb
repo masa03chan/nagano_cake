@@ -3,35 +3,75 @@
 </div>
 <div class="container">
   <div class="row">
-    <div class="col-12 p-0">
+    <div class="col-12">
       <h5 class="d-inline-block bg-light col-2 text-center my-5 text-nowrap">商品新規登録</h5>
     </div>
   </div>
-  <div class="row justify-content-around">
+  <div class="row">
     <% if @item.errors.any? %>
       <P>空欄では保存できません。</P>
     <% end %>
-    <div class="col-sm-12 p-0">
+    <div class="col-12 justify-content-center">
       <%= form_with model: @item do |f| %>
-        <div class="form-group row">
+        <div class="form-group row justify-content-center">
           <div class="col-2 col-form-label">
-            <%= f.label :image, class: "font-weight-bold text-nowrap" do %>商品画像<% end %>
+            <%= f.label :image, class: "font-weight-bold text-center text-nowrap" do %>商品画像<% end %>
           </div>
-          <div class="col-3 mr-4 col-form-label">
-            <%= f.file_field :image, class: "border rounded", accept: "image/*" %>
+          <div class="col-4 col-form-label">
+            <%= f.file_field :image, class: "label", accept: "image/*" %>
           </div>
         </div>
-        
-        <div class="form-group row">
+
+        <div class="form-group row justify-content-center">
           <div class="col-2 col-form-label">
             <%= f.label :name, class: "font-weight-bold text-nowrap" do %>商品名<% end %>
           </div>
-          <div class="col-3 mr-4 col-form-label">
+          <div class="col-4 col-form-label">
             <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "商品名", class: "form-control border border-secondary" %>
           </div>
         </div>
+
+        <div class="form-group row justify-content-center">
+          <div class="col-2 col-form-label">
+            <%= f.label :name, class: "font-weight-bold text-nowrap" do %>商品説明<% end %>
+          </div>
+          <div class="col-4 col-form-label">
+            <%= f.text_area :name, autofocus: true, autocomplete: "name", placeholder: "ここに説明文を記述します", class: "form-control form-control-lg border border-secondary", rows: "3" %>
+          </div>
+        </div>
         
-        <div class="form-group row">
+        <div class="form-group row justify-content-center">
+          <div class="col-2 col-form-label">
+            <%= f.label :genre_id, class: "font-weight-bold text-nowrap" do %>ジャンル<% end %>
+          </div>
+          <div class="col-4 col-form-label">
+            <%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name), {prompt: "--選択してください--"}, class: "form-control border border-secondary" %>
+          </div>
+        </div>
+        
+        <div class="form-group row justify-content-center">
+          <div class="col-2 col-form-label">
+            <%= f.label :price, class: "font-weight-bold text-nowrap" do %>税抜価格<% end %>
+          </div>
+          <div class="col-4 form-inline">
+            <%= f.text_field :price, autofocus: true, autocomplete: "price", placeholder: "1000", class: "form-control border border-secondary" %>
+            <%= f.label :price, "円" %>
+          </div>
+        </div>
+        
+        <div class="form-group row justify-content-center">
+          <div class="col-2 col-form-label">
+            <%= f.label :is_active, class: "font-weight-bold text-nowrap" do %>販売ステータス<% end %>
+          </div>
+          <div class="col-4 custom-control-inline">
+            <%= f.radio_button :, "credit_card" %>
+            <%= f.label :is_active, "販売中" %>
+            
+            <%= f.radio_button :payment_method, "transfer" %>
+          </div>
+        </div>
+        
+        <div class="form-group row justify-content-center">
           <div class="actions col-2 col-form-label text-center">
             <%= f.submit "新規登録", class: "btn btn-success btn-block" %>
           </div>

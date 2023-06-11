@@ -1,3 +1,9 @@
 // Place all the styles related to the admin/items controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.label{
+  color: black; /* ラベルテキストの色を指定する */
+  background-color: white;/* ラベルの背景色を指定する */
+  padding: 10px; /* ラベルとテキスト間の余白を指定する */
+  border: double 4px #AAAAAA;/* ラベルのボーダーを指定する */
+}
