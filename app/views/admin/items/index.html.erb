@@ -23,10 +23,16 @@
           <% @items.each do |item| %>
             <tr>
               <td class="col-1"><%= item.id %></td>
-              <td class="col-3"><%= link_to admin_item_path(item.id), class: "" %></td>
+              <td class="col-3"><%= link_to item.name, admin_item_path(item.id), style: "text-decoration: underline; color: black" %></td>
               <td class="col-1"><%= item.price %></td>
               <td class="col-3"><%= item.genre_id %></td>
-              <td class="col-1"><%= item.is_active %></td>
+              <td class="col-1">
+                <% if item.is_active? %>
+                  <P class="font-weight-bold", style="color:lightgreen">販売中</P>
+                <% else %>
+                  <P class="font-weight-bold", style="color-grey">販売停止中</P>
+                <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>
