@@ -1,2 +1,36 @@
-<h1>Admin::Items#index</h1>
-<p>Find me in app/views/admin/items/index.html.erb</p>
+<div>
+  <%= flash[:notice] %>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-12 p-0">
+      <h5 class="d-inline-block bg-light col-2 text-center my-5 text-nowrap">商品一覧</h5>
+    </div>
+  </div>
+  <div class="row justify-content-around">
+    <div class="col-sm-12 p-0">
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col-1">商品ID</th>
+            <th scope="col-3">商品名</th>
+            <th scope="col-1">税抜価格</th>
+            <th scope="col-3">ジャンル</th>
+            <th scope="col-1">ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @items.each do |item| %>
+            <tr>
+              <td class="col-1"><%= item.id %></td>
+              <td class="col-3"><%= link_to admin_item_path(item.id), class: "" %></td>
+              <td class="col-1"><%= item.price %></td>
+              <td class="col-3"><%= item.genre_id %></td>
+              <td class="col-1"><%= item.is_active %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

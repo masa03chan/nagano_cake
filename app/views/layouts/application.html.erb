@@ -94,7 +94,7 @@
             </div>
             <div class="input-group row justify-content-end ">
               <% if customer_signed_in? %>
-                <div class="col-sm-3"><p class="text-left text-nowrap">ようこそ、<%= @customer.first_name %>さん！</p></div>
+                <div class="col-sm-3"><p class="text-left text-nowrap">ようこそ、<%= current_customer.first_name %>さん！</p></div>
               <% end %>
               <div class="col"></div>
               <input type="form-control input-group-prepend col-sm-3 text-right" type="search" id="txt-search" placeholder="Search" aria-label="Search">

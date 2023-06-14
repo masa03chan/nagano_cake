@@ -9,10 +9,17 @@
   </div>
   <div class="row">
     <% if @item.errors.any? %>
-      <P>空欄では保存できません。</P>
+      <div>
+      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this book from being saved:</h2>
+      <ul>
+      <% @item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
     <% end %>
     <div class="col-sm-12 justify-content-center">
-      <%= form_with model: @item, url: admin_items_path do |f| %>
+      <%= form_with model: @item, url: admin_items_path, local:true do |f| %>
         <div class="form-group row justify-content-center">
           <div class="col-sm-2 mr-2 col-form-label">
             <%= f.label :image, class: "font-weight-bold text-center text-nowrap" do %>商品画像<% end %>
@@ -33,10 +40,10 @@
 
         <div class="form-group row justify-content-center">
           <div class="col-sm-2 mr-2 col-form-label">
-            <%= f.label :name, class: "font-weight-bold text-nowrap" do %>商品説明<% end %>
+            <%= f.label :introduction, class: "font-weight-bold text-nowrap" do %>商品説明<% end %>
           </div>
           <div class="col-sm-4 col-form-label">
-            <%= f.text_area :name, autofocus: true, autocomplete: "name", placeholder: "ここに説明文を記述します", class: "form-control form-control-lg border border-secondary", rows: "3" %>
+            <%= f.text_area :introduction, autofocus: true, autocomplete: "name", placeholder: "ここに説明文を記述します", class: "form-control form-control-lg border border-secondary", rows: "3" %>
           </div>
         </div>
 
