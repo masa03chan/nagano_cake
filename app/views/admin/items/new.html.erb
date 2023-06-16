@@ -10,7 +10,7 @@
   <div class="row">
     <% if @item.errors.any? %>
       <div>
-      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this book from being saved:</h2>
+      <h2><%= pluralize(@item.errors.count, "error") %> 件のエラーがあります。</h2>
       <ul>
       <% @item.errors.full_messages.each do |message| %>
         <li><%= message %></li>
