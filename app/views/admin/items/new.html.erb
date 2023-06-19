@@ -9,7 +9,7 @@
   </div>
   <div class="row">
     <% if @item.errors.any? %>
-      <div>
+    <div>
       <h2><%= pluralize(@item.errors.count, "error") %> 件のエラーがあります。</h2>
       <ul>
       <% @item.errors.full_messages.each do |message| %>

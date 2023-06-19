@@ -1,2 +1,92 @@
-<h1>Admin::Items#edit</h1>
-<p>Find me in app/views/admin/items/edit.html.erb</p>
+<div>
+  <%= flash[:notice] %>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-12 p-0">
+      <h5 class="d-inline-block bg-light col-2 text-center my-5 text-nowrap">商品編集</h5>
+    </div>
+  </div>
+  <div class="row justify-content-around">
+    <% if @item.errors.any? %>
+    <div>
+      <h2><%= pluralize(@item.errors.count, "error") %> 件のエラーがあります。</h2>
+      <ul>
+      <% @item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+    <% end %>
+    <div class="col-sm-12 p-0">
+      <%= form_with model: @item, url: admin_item_path(@item), method: :patch do |f| %>
+        <div class="form-group row justify-content-center">
+          <div class="col-sm-2 mr-2 col-form-label">
+            <%= f.label :image, class: "font-weight-bold text-center text-nowrap" do %>商品画像<% end %>
+          </div>
+          <div class="col-sm-4 col-form-label">
+            <%= f.file_field :image, class: "label", accept: "image/*" %>
+          </div>
+        </div>
+
+        <div class="form-group row justify-content-center">
+          <div class="col-sm-2 mr-2 col-form-label">
+            <%= f.label :name, class: "font-weight-bold text-nowrap" do %>商品名<% end %>
+          </div>
+          <div class="col-sm-4 col-form-label">
+            <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "商品名", class: "form-control border border-secondary" %>
+          </div>
+        </div>
+
+        <div class="form-group row justify-content-center">
+          <div class="col-sm-2 mr-2 col-form-label">
+            <%= f.label :introduction, class: "font-weight-bold text-nowrap" do %>商品説明<% end %>
+          </div>
+          <div class="col-sm-4 col-form-label">
+            <%= f.text_area :introduction, autofocus: true, autocomplete: "name", placeholder: "ここに説明文を記述します", class: "form-control form-control-lg border border-secondary", rows: "3" %>
+          </div>
+        </div>
+
+        <div class="form-group row justify-content-center">
+          <div class="col-sm-2 mr-2 col-form-label">
+            <%= f.label :genre_id, class: "font-weight-bold text-nowrap" do %>ジャンル<% end %>
+          </div>
+          <div class="col-sm-4 col-form-label">
+            <%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name), {prompt: "--選択してください--"}, class: "form-control border border-secondary" %>
+          </div>
+        </div>
+
+        <div class="form-group row justify-content-center">
+          <div class="col-sm-2 mr-2 col-form-label">
+            <%= f.label :price, class: "font-weight-bold text-nowrap" do %>税抜価格<% end %>
+          </div>
+          <div class="col-sm-4 form-inline">
+            <%= f.text_field :price, autofocus: true, autocomplete: "price", placeholder: "1000", class: "form-control border border-secondary" %>
+            <%= f.label :price, "円" %>
+          </div>
+        </div>
+
+        <div class="form-group row justify-content-center">
+          <div class="col-sm-2 mr-2 col-form-label">
+            <%= f.label :is_active, class: "font-weight-bold text-nowrap" do %>販売ステータス<% end %>
+          </div>
+          <div class="col-sm-4 ">
+            <div class="custom-control custom-radio custom-control-inline">
+              <%= f.radio_button :is_active, true %>
+              <%= f.label :is_active, "販売中", value: true, class: "text-nowrap mr-5" %>
+
+              <%= f.radio_button :is_active, false %>
+              <%= f.label :is_active, "販売停止中", value: false, class: "text-nowrap" %>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row justify-content-center">
+          <div class="col-sm-2"></div>
+          <div class="actions col-sm-2 col-form-label text-center">
+            <%= f.submit "変更を保存", class: "btn btn-success btn-block" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
