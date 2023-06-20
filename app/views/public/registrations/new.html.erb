@@ -12,13 +12,13 @@
           <div class="col-3 form-inline">
             <label for="name">名前</label>
           </div>
-          <%= f.label :first_name, class: "mr-4" do %>(姓) <% end %>
+          <%= f.label :last_name, class: "mr-4" do %>(姓) <% end %>
           <div class="col-3 mr-4">
-            <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", placeholder: "令和", class: "form-control border border-secondary rounded" %>
+            <%= f.text_field :last_name, autofocus: true, autocomplete: "first_name", placeholder: "令和", class: "form-control border border-secondary rounded" %>
           </div>
-          <%= f.label :last_name, class: "mr-4" do %>(名) <% end %>
+          <%= f.label :first_name, class: "mr-4" do %>(名) <% end %>
           <div class="col-3">
-            <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", placeholder: "道子", class: "form-control border border-secondary rounded" %>
+            <%= f.text_field :first_name, autofocus: true, autocomplete: "last_name", placeholder: "道子", class: "form-control border border-secondary rounded" %>
           </div>
         </div>
         
@@ -26,13 +26,13 @@
           <div class="col-3 form-inline">
             <label for="name">フリガナ</label>
           </div>
-            <%= f.label :first_name_kana, class: "mr-2" do %>(セイ)<% end %>
+            <%= f.label :last_name_kana, class: "mr-2" do %>(セイ)<% end %>
           <div class="col-3 mr-4">
-            <%= f.text_field :first_name_kana, autofocus: true, autocomplete: "first_name", placeholder: "レイワ", class: "form-control border border-secondary rounded" %>
+            <%= f.text_field :last_name_kana, autofocus: true, autocomplete: "first_name", placeholder: "レイワ", class: "form-control border border-secondary rounded" %>
           </div>
-          <%= f.label :last_name_kana, class: "mr-2" do %>(メイ)<% end %>
+          <%= f.label :first_name_kana, class: "mr-2" do %>(メイ)<% end %>
           <div class="col-3">
-            <%= f.text_field :last_name_kana, autofocus: true, autocomplete: "last_name", placeholder: "ミチコ", class: "form-control border border-secondary rounded" %>
+            <%= f.text_field :first_name_kana, autofocus: true, autocomplete: "last_name", placeholder: "ミチコ", class: "form-control border border-secondary rounded" %>
           </div>
         </div>
         
