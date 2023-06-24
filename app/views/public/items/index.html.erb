@@ -3,12 +3,10 @@
 </div>
 <div class="container">
   <div class="row">
-    <div class="col-3">
-        
-      
-    </div>
+    <%= render "public/shared/genrebar", genres: @genres %>
+    <div class="col-1"></div>
     <div class="col-9 p-0">
-      <h5 class="d-inline-block col-2 text-center my-5 text-nowrap">商品一覧<span>(全<%= @items.count %>件)</span></h5>
+      <h5 class="d-inline-block col-2 text-center my-5 text-nowrap">商品一覧<span>(全<%= @quantity %>件)</span></h5>
       <div class="row">
         <% if @items.present? %>  
           <% @items.each do |item| %>

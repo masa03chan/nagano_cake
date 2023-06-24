@@ -1,0 +1,16 @@
+<div class="col-sm-2 my-5">
+  <table class="table table-hover table-bordered">
+    <thead>
+      <tr>
+        <th class="active text-center"><h5 class="text-nowrap">ジャンル検索</h5></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% genres.each do |genre| %>
+        <tr class="table-borderless">
+          <td><%= link_to genre.name, items_path(genre_id: genre.id), style: "text-decoration: none; color: black"%></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
