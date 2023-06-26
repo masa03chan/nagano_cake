@@ -8,36 +8,77 @@
     </div>
   </div>
   <div class="row">
-    <%= form_with %>
-  
+    <% if @address.errors.any? %>
+      <div>
+        <h2><%= @address.errors.count %> 件のエラーがあります。</h2>
+        <ul>
+        <% @address.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="col-sm-12">
+      <%= form_with model: @address, url: addresses_path do |f| %>
+        <div class="form-group row justify-content-flex-start">
+          <div class="col-3 col-form-label">
+            <%= f.label :postal_code, class: "text-nowrap" do %>郵便番号(ハイフンなし)<% end %>
+          </div>
+          <div class="col-3 form-inline">
+            <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code", placeholder: "0000000", class: "form-control border border-secondary rounded" %>
+          </div>
+        </div>
+
+        <div class="form-group row justify-content-flex-start">
+          <div class="col-sm-3 col-form-label">
+            <%= f.label :address, class: "text-nowrap" do %>住所<% end %>
+          </div>
+          <div class="col-sm-7 d-flex align-items-center">
+            <%= f.text_field :address, autofocus: true, autocomplete: "address", placeholder: "東京都渋谷区代々木神園町0-0", class: "form-control border border-secondary rounded" %>
+          </div>
+        </div>
+        <div class="form-group row justify-content-flex-start">
+          <div class="col-sm-3 col-form-label">
+            <%= f.label :name, class: "text-nowrap" do %>宛名<% end %>
+          </div>
+          <div class="col-sm-3 form-inline">
+            <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "令和道子", class: "form-control border border-secondary" %>
+          </div>
+          <div class="col-sm-4"></div>
+          <div class="actions col-2 col-form-label">
+            <%= f.submit "新規登録", class: "btn btn-success btn-block" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
   <div class="row">
-    <div class="col-sm-10 mx-auto">
-      <table class="table">
+    <div class="col-sm-11">
+      <table class="table table-bordered">
         <thead class="thead-light">
           <tr class="text-nowrap">
-            <th scope="col-1">会員ID</th>
-            <th scope="col-2">氏名</th>
-            <th scope="col-2">メールアドレス</th>
-            <th scope="col-2">ステータス</th>
+            <th scope="col-sm-1">郵便番号</th>
+            <th scope="col-sm-4">住所</th>
+            <th scope="col-sm-2">宛名</th>
+            <th scope="col-sm-4"></th>
           </tr>
         </thead>
         <tbody>
-          <% @customers.each do |customer| %>
-            <tr class="table">
-              <td class="col-1"><%= customer.id %></td>
-              <td class="col-2 text-nowrap"><%= link_to customer.full_name, admin_customer_path(customer.id), style: "text-decoration: underline; color: black" %></td>
-              <td class="col-2"><%= customer.email %></td>
-              <td class="col-2">
-                <% if customer.is_deleted? %>
-                  <P class="font-weight-bold", style="color-grey">退会</P>
-                <% else %>
-                  <P class="font-weight-bold", style="color:lightgreen">有効</P>
-                <% end %>
-              </td>
-            </tr>
+          <% if @addresses.present? %>
+            <% @addresses.each do |address| %>
+              <tr class="table">
+                <td class="col-sm-1"><%= address.postal_code %></td>
+                <td class="col-sm-4 text-nowrap"><%= address.address %></td>
+                <td class="col-sm-2"><%= address.name %></td>
+                <td class="col-sm d-flex flex-row">
+                  <%= link_to "編集する", edit_address_path(address.id), class: "col-sm btn btn-success text-nowrap mr-1" %>
+                  <%= link_to "削除する", address_path(address.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "col-sm btn btn-danger text-nowrap" %>
+                </td>
+              </tr>
+            <% end %>
+          <% else %>
+            <p>配送先が登録されていません。</p> 
           <% end %>
-          <%= paginate @customers %>
         </tbody>
       </table>
     </div>
