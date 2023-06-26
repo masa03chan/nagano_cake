@@ -1,2 +1,55 @@
-<h1>Public::Addresses#edit</h1>
-<p>Find me in app/views/public/addresses/edit.html.erb</p>
+<div>
+  <%= flash[:notice] %>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-12 p-0">
+      <h5 class="d-inline-block bg-light col-2 text-center my-5 text-nowrap">配送先編集</h5>
+    </div>
+  </div>
+  <div class="row">
+    <% if @address.errors.any? %>
+      <div>
+        <h2><%= @address.errors.count %> 件のエラーがあります。</h2>
+        <ul>
+        <% @address.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="col-md-12">
+      <%= form_with model: @address, url: address_path(@address), method: :patch do |f| %>
+        <div class="form-group row justify-content-flex-start">
+          <div class="col-md-3 col-form-label">
+            <%= f.label :postal_code, class: "text-nowrap" do %>郵便番号(ハイフンなし)<% end %>
+          </div>
+          <div class="col-md-3 form-inline">
+            <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code", placeholder: "0000000", class: "form-control border border-secondary rounded" %>
+          </div>
+        </div>
+
+        <div class="form-group row justify-content-flex-start">
+          <div class="col-md-3 col-form-label">
+            <%= f.label :address, class: "text-nowrap" do %>住所<% end %>
+          </div>
+          <div class="col-md-7 d-flex align-items-center">
+            <%= f.text_field :address, autofocus: true, autocomplete: "address", placeholder: "東京都渋谷区代々木神園町0-0", class: "form-control border border-secondary rounded" %>
+          </div>
+        </div>
+        <div class="form-group row justify-content-flex-start">
+          <div class="col-md-3 col-form-label">
+            <%= f.label :name, class: "text-nowrap" do %>宛名<% end %>
+          </div>
+          <div class="col-md-3 form-inline">
+            <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "令和道子", class: "form-control border border-secondary" %>
+          </div>
+          <div class="col-md-4 col-sm"></div>
+          <div class="actions col-md-2 col-form-label">
+            <%= f.submit "変更内容を保存", class: "btn btn-success" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
