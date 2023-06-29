@@ -12,12 +12,23 @@
       <div class="d-flex flex-column mb-2">
         <h2><%= @item.name %></h2>
         <p class="mb-5", style="font-size: 20px;"><%= @item.introduction %></p>
-        <p class="font-weight-bold", style="font-size: 22px;">￥<%= (@item.price*1.1).floor.to_s(:delimited) %><span style="font-size: 10px;">(税込)</span></p>
+        <p class="font-weight-bold", style="font-size: 22px;">￥<%= @item.with_tax_price.to_s(:delimited) %><span style="font-size: 10px;">(税込)</span></p>
       </div>
-      <div class="flex-row my-3">
+      <div class="flex-row my-3 form-group">
+        <% if @cart_item.errors.any? %>
+        <div>
+          <h2><%= @cart_item.errors.count %> 件のエラーがあります。</h2>
+          <ul>
+          <% @cart_item.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+        <% end %>
         <%= form_with model: @cart_item, url: cart_items_path(@cart_item), class: "form-inline justify-content-center" do |f| %>
-          <div class="col-auto mr-5">
-            <%= f.number_field :amount , placeholder: "個数", min: 1, max: 20 %>
+          <%= f.hidden_field :item_id, :value => @item.id %>
+          <div class="col-auto mr-5 form-row">
+            <%= f.select :amount, *[1..10], placeholder: "個数" %>
           </div>
           <div>
             <%= f.submit "カートに入れる" , class: "btn btn-success btn-block" %>

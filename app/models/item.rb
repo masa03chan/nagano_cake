@@ -7,6 +7,10 @@ class Item < ApplicationRecord
   validates :introduction, presence: true
   validates :price, presence: true
   validates :genre_id, presence: true
+  
+  def with_tax_price
+    (price * 1.1).floor
+  end
 
   def get_image(width, height)
     unless image.attached?
