@@ -25,7 +25,7 @@
           </ul>
         </div>
         <% end %>
-        <%= form_with model: @cart_item, url: cart_items_path(@cart_item), class: "form-inline justify-content-center" do |f| %>
+        <%= form_with model: @cart_item, url: cart_items_path(item_id: @item), method: :post, class: "form-inline justify-content-center", local:true do |f| %>
           <%= f.hidden_field :item_id, :value => @item.id %>
           <div class="col-auto mr-5 form-row">
             <%= f.select :amount, *[1..10], placeholder: "個数" %>
