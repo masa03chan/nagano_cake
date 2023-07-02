@@ -26,12 +26,16 @@
         <tbody>
           <% @cart_items.each do |cart_item| %>
             <tr class="table">
-              <td class="col-sm-4"><%= image_tag cart_item.item.image, class: "image" %><%= cart_item.item.name %></td>
+              <td class="col-sm-4"><%= image_tag cart_item.item.get_image(50, 50), class: "image" %><%= cart_item.item.name %></td>
               <td class="col-sm-2 text-nowrap"><%= cart_item.with_tax_price.to_s(:delimited) %></td>
+              <td class="col-sm-2 flex-row ">
+                <%= form_with model: @cart_item, url: cart_items_path(item_id: @item), method: :post, class: "form-inline justify-content-between", local:true do |f| %>
+                  <%= f.select :amount, *[1..10] ,{ selected: cart_item.amount } %>
+                  <%= f.submit "変更" , class: "btn btn-success" %>
+                <% end %>
+              </td>
               <td class="col-sm-2">
-                <select multiple class="form-control">
-                  <%= cart_item.amount %>
-                </select>
+                <%= cart_item.subtotal.to_s(:delimited) %>
               </td>
               <td class="col-sm d-flex flex-row">
                 <%= link_to "削除する", cart_item_path(cart_item.item.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "col-sm btn btn-danger text-nowrap" %>

@@ -25,18 +25,18 @@ class Public::CartItemsController < ApplicationController
     @cart_item.customer_id = current_customer.id
     @cart_item.item_id = params[:item_id]
     if @cart_item.update(cart_item_params)
-      flash[:notice] = "カート内を更新ました。"
+      flash[:notice] = "個数を更新しました。"
       redirect_to cart_items_path
     else
-      flash[:alert] = "個数を選択してください"
-      @items = Item.all
+      flash[:alert] = "個数を選択してください。"
+      @cart_items = CartItem.all
       render :index
     end
   end
 
   def destroy
     @cart_item = CartItem.find(params[:id])
-    CartItem.destroy
+    cartittem.destroy
     redirect_to cart_items_path
   end
 
