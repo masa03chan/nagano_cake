@@ -10,7 +10,13 @@ class Public::CartItemsController < ApplicationController
     @cart_item = CartItem.new(cart_item_params)
     @cart_item.customer_id = current_customer.id
     @cart_item.item_id = params[:item_id]
-    if @cart_item.save!
+    if CartItem.find_by(item_id: params[:cart_item][:item_id]).present?
+      cart_item = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
+      cart_item.amount += params[:cart_item][:amount].to_i
+      cart_item.save
+      flash[:notice] = "商品をカートに入れました。"
+      redirect_to cart_items_path
+    elsif @cart_item.save
       flash[:notice] = "商品をカートに入れました。"
       redirect_to cart_items_path
     else
@@ -21,10 +27,9 @@ class Public::CartItemsController < ApplicationController
   end
 
   def update
-    @cart_item = CartItem.find(params[:id])
-    @cart_item.customer_id = current_customer.id
-    @cart_item.item_id = params[:item_id]
-    if @cart_item.update(cart_item_params)
+    cart_item = CartItem.find(params[:id])
+    cart_item.customer_id = current_customer.id
+    if cart_item.update(cart_item_params)
       flash[:notice] = "個数を更新しました。"
       redirect_to cart_items_path
     else
@@ -35,12 +40,17 @@ class Public::CartItemsController < ApplicationController
   end
 
   def destroy
-    @cart_item = CartItem.find(params[:id])
-    cartittem.destroy
+    cart_item = CartItem.find(params[:id])
+    cart_item.destroy
+    flash.now[:alert] = "#{@cart_item.item.name}を削除しました"
     redirect_to cart_items_path
   end
 
   def destroy_all
+    cart_item = CartItem.find(params[:id])
+    cart_item.destroy_all
+    flash[:alert] = "カートの商品を全て削除しました"
+    redirect_to cart_items_path
   end
 
   private

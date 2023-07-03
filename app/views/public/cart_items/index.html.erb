@@ -6,7 +6,7 @@
     <h5 class="d-inline-block bg-light col-sm-3 text-center my-4 mx-0 text-nowrap">ショッピングカート</h5>
     <% if @cart_items.present? %>
     <span class="col-sm-3 ">
-      <%= link_to "カートを空にする", cart_items_destroy_all_path, method: :delete, "data-confirm" => "カート内の全ての商品が空になります。よろしいですか？", class: "btn btn-danger text-nowrap" %>
+      <%= link_to "カートを空にする", cart_items_destroy_all_path, method: :delete, "data-confirm" => "カート内がすべて空になります。よろしいですか？", class: "btn btn-danger text-nowrap" %>
     </span>
     <% end %>
   </div>
@@ -29,7 +29,7 @@
               <td class="col-sm-4"><%= image_tag cart_item.item.get_image(50, 50), class: "image" %><%= cart_item.item.name %></td>
               <td class="col-sm-2 text-nowrap"><%= cart_item.with_tax_price.to_s(:delimited) %></td>
               <td class="col-sm-2 flex-row ">
-                <%= form_with model: @cart_item, url: cart_items_path(item_id: @item), method: :post, class: "form-inline justify-content-between", local:true do |f| %>
+                <%= form_with model: cart_item, url: cart_item_path(cart_item.id), method: :patch, class: "form-inline justify-content-between", local: true do |f| %>
                   <%= f.select :amount, *[1..10] ,{ selected: cart_item.amount } %>
                   <%= f.submit "変更" , class: "btn btn-success" %>
                 <% end %>
@@ -38,7 +38,7 @@
                 <%= cart_item.subtotal.to_s(:delimited) %>
               </td>
               <td class="col-sm d-flex flex-row">
-                <%= link_to "削除する", cart_item_path(cart_item.item.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "col-sm btn btn-danger text-nowrap" %>
+                <%= link_to "削除する", cart_item_path(cart_item.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "col-sm btn btn-danger text-nowrap" %>
               </td>
             </tr>
           <% end %>
@@ -48,5 +48,6 @@
   </div>
   <% else %>
     <p class="text-center">カートは空です。ショッピングをお楽しみください。</p>
+    <%= link_to "商品を探す", cart_items_path, class: "col-sm btn btn-primary text-nowrap" %>
   <% end %>
 </div>
