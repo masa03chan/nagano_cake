@@ -4,6 +4,7 @@ class Public::CartItemsController < ApplicationController
 
   def index
     @cart_items = CartItem.all
+    @total = @cart_items.inject(0){ |sum, cart_item| sum + cart_item.subtotal } 
   end
 
   def create
@@ -39,17 +40,17 @@ class Public::CartItemsController < ApplicationController
     end
   end
 
-  def destroy
-    cart_item = CartItem.find(params[:id])
-    cart_item.destroy
-    flash.now[:alert] = "#{@cart_item.item.name}を削除しました"
+  def destroy_all
+    cart_items = CartItem.all
+    cart_items.destroy_all
+    flash[:alert] = "カートの商品を全て削除しました。"
     redirect_to cart_items_path
   end
 
-  def destroy_all
+  def destroy
     cart_item = CartItem.find(params[:id])
-    cart_item.destroy_all
-    flash[:alert] = "カートの商品を全て削除しました"
+    cart_item.destroy
+    flash[:notice] = "#{cart_item.item.name}を削除しました。"
     redirect_to cart_items_path
   end
 
