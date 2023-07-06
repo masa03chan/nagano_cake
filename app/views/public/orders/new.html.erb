@@ -1,2 +1,85 @@
-<h1>Public::Orders#new</h1>
-<p>Find me in app/views/public/orders/new.html.erb</p>
+<div>
+  <%= flash[:notice] %>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h4 class="d-inline-block bg-light col-2 text-center my-3 text-nowrap">注文情報入力</h4>
+    </div>
+  </div>
+  <div class="row">
+    <% if @order.errors.any? %>
+    <div>
+      <h2><%= @order.errors.count %> 件のエラーがあります。</h2>
+      <ul>
+      <% @order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+    <% end %>
+  </div>
+  <%= form_with model: @order, url: orders_confirm_path, local:true do |f| %>
+  <div class="row d-flex flex-column">
+    <h5 class="col-2 text-nowrap">支払方法</h5>
+    <div class="form-check ml-5">
+      <div style="color: black;">
+        <%= f.radio_button :payment_method, Order.payment_methods.key(0), class: "form-check-input checked" %>
+        <%= f.label :payment_method_credit_card, Order.payment_methods_i18n[:credit_card],  class: "text-nowrap" %>
+      </div>
+      <div style="color: black;">
+        <%= f.radio_button :payment_method, Order.payment_methods.key(1), class: "form-check-input" %>
+        <%= f.label :payment_method_transfer, Order.payment_methods_i18n[:transfer] , class: "text-nowrap" %>
+      </div>
+    </div>
+  </div>
+  <div class="row d-flex flex-column">
+    <h5 class="col-2 text-nowrap">お届け先</h5>
+    <div class="form-check ml-5">
+      <div style="color: black;">
+        <%= f.radio_button :select_address, "0", class: "form-check-input checked" %>
+        <%= f.label :current_customer_address, "ご自身の住所",  class: "text-nowrap" %>
+        <div><%= current_customer.customer_address_display %></div>
+      </div>
+      <div style="color: black;">
+        <%= f.radio_button :select_address, "1", class: "form-check-input" %>
+        <%= f.label :current_customer_addresses, "登録済み住所から選択",  class: "text-nowrap" %>
+        <div><%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :address_display) %></div>
+      </div>
+      <div style="color: black;">
+        <%= f.radio_button :select_address, "2", class: "form-check-input" %>
+        <%= f.label :new_address, "新しいお届け先",  class: "text-nowrap" %>
+        <form>
+          <div class="form-group row">
+            <div class="col-sm-3 col-form-label">
+              <%= f.label :postal_code, class: "text-nowrap" do %>郵便番号(ハイフンなし)<% end %>
+            </div>
+            <div class="col-sm-3">
+              <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code", placeholder: "0000000", class: "form-control border border-secondary rounded" %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-3 col-form-label">
+              <%= f.label :address do %>住所<% end %>
+            </div>
+            <div class="col-sm-7">
+              <%= f.text_field :address, autofocus: true, autocomplete: "address", placeholder: "東京都渋谷区代々木神園町0-0", class: "form-control border border-secondary rounded" %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-3 col-form-label">
+              <%= f.label :name do %>宛名<% end %>
+            </div>
+            <div class="col-sm-3">
+              <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "令和道子", class: "form-control border border-secondary rounded" %>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="actions col-3  col-form-label text-center">
+    <%= f.submit "確認画面へ進む", class: "btn btn-primary" %>
+  </div>
+  <% end %>
+</div>

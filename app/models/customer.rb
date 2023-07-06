@@ -3,7 +3,8 @@ class Customer < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   has_many :cart_items, dependent: :destroy
   has_many :addresses, dependent: :destroy
-  
+  has_many :orders, dependent: :destroy
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -14,9 +15,13 @@ class Customer < ApplicationRecord
     validates :postal_code, presence: true
     validates :address, presence: true
     validates :telephone_number, presence: true
-    
+
     def full_name
       self.last_name + " " + self.first_name
+    end
+
+    def customer_address_display
+      '〒' + postal_code + ' ' + address + ' ' + full_name
     end
 
 end

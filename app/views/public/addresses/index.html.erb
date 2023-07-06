@@ -52,6 +52,7 @@
       <% end %>
     </div>
   </div>
+  <% if @addresses.present? %>
   <div class="row">
     <div class="col-sm-11">
       <table class="table table-bordered">
@@ -64,23 +65,22 @@
           </tr>
         </thead>
         <tbody>
-          <% if @addresses.present? %>
-            <% @addresses.each do |address| %>
-              <tr class="table">
-                <td class="col-sm-1"><%= address.postal_code %></td>
-                <td class="col-sm-4 text-nowrap"><%= address.address %></td>
-                <td class="col-sm-2"><%= address.name %></td>
-                <td class="col-sm d-flex flex-row">
-                  <%= link_to "編集する", edit_address_path(address.id), class: "col-sm btn btn-success text-nowrap mr-1" %>
-                  <%= link_to "削除する", address_path(address.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "col-sm btn btn-danger text-nowrap" %>
-                </td>
-              </tr>
-            <% end %>
-          <% else %>
-            <p>配送先が登録されていません。</p> 
+          <% @addresses.each do |address| %>
+            <tr class="table">
+              <td class="col-sm-1"><%= address.postal_code %></td>
+              <td class="col-sm-4 text-nowrap"><%= address.address %></td>
+              <td class="col-sm-2"><%= address.name %></td>
+              <td class="col-sm d-flex flex-row">
+                <%= link_to "編集する", edit_address_path(address.id), class: "col-sm btn btn-success text-nowrap mr-1" %>
+                <%= link_to "削除する", address_path(address.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "col-sm btn btn-danger text-nowrap" %>
+              </td>
+            </tr>
           <% end %>
         </tbody>
       </table>
     </div>
   </div>
+  <% else %>
+    <p class="text-center">配送先が登録されていません。</p> 
+  <% end %>
 </div>
