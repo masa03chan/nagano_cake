@@ -19,7 +19,7 @@
     </div>
     <% end %>
   </div>
-  <%= form_with model: @order, url: orders_confirmed_path, method: :post, local: true do |f| %>
+  <%= form_with model: @order, url: orders_confirm_path, method: :post, local: true do |f| %>
     <div class="row d-flex flex-column">
       <h5 class="col-2 text-nowrap font-weight-bold">支払方法</h5>
       <div class="form-check ml-5">
@@ -57,7 +57,7 @@
         <div class="my-3">
           <%= f.radio_button :select_address, "2", class: "form-check-input" %>
           <%= f.label :new_address, "新しいお届け先",  class: "text-nowrap" %>
-          <form>
+          <div>
             <div class="form-group row">
               <div class="col-sm-3 col-form-label">
                 <%= f.label :postal_code, class: "text-nowrap" do %>郵便番号(ハイフンなし)<% end %>
@@ -82,7 +82,7 @@
                 <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "令和道子", class: "form-control border border-secondary rounded" %>
               </div>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>

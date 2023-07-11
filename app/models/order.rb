@@ -12,4 +12,7 @@ class Order < ApplicationRecord
   validates :payment_method, presence: true
   validates :status, presence: true
 
+  def address_display
+    '〒' + postal_code + ' ' + address + ' ' + name
+  end
 end

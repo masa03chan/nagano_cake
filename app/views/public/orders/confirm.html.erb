@@ -1,2 +1,70 @@
-<h1>Public::Order#confirm</h1>
-
+<div>
+  <%= flash[:notice] %>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h4 class="d-inline-block bg-light col-2 text-center my-3 text-nowrap">注文情報確認</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-9">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr class="text-nowrap">
+            <th scope="col-sm-4">商品名</th>
+            <th scope="col-sm-2">単価(税込)</th>
+            <th scope="col-sm-1">数量</th>
+            <th scope="col-sm-2">小計</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @cart_items.each do |cart_item| %>
+          <tr class="table">
+            <td class="col-sm-4"><%= image_tag cart_item.item.get_image(50, 50), class: "image" %><%= cart_item.item.name %></td>
+            <td class="col-sm-2 text-nowrap"><%= cart_item.with_tax_price.to_s(:delimited) %></td>
+            <td class="col-sm-1"><%= cart_item.amount %></td>
+            <td class="col-sm-2"><%= cart_item.subtotal.to_s(:delimited) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-sm-3">
+      <table class="table table-bordered">
+        <tr class="text-nowrap">
+          <th class="bg-light">送料</td>
+          <td><%= @order.shipping_cost %></td>
+        </tr>
+        <tr class="text-nowrap">
+          <th class="bg-light">商品合計</td>
+          <td><%= @total.to_s(:delimited) %></td>
+        </tr>
+        <tr class="text-nowrap">
+          <th class="bg-light">請求金額</td>
+          <td><%= (@total + @order.shipping_cost).to_s(:delimited) %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="d-flex flex-column">
+      <div>
+        <h5 class="d-inline-block text-nowrap font-weight-bold mr-3">支払方法</h5>
+        <span><%= @order.payment_method_i18n %></span>
+      </div>
+      <div>
+        <h5 class="d-inline-block text-nowrap font-weight-bold mr-3">お届け先</h5>
+        <span><%= @order.address_display %></span>
+      </div>
+    </div>
+  </div>
+  <div class="actions text-center">
+  <%= form_with model: @order, url: orders_confirmed_path, local: true do |f| %>
+    <%= f.hidden_field :name %>
+    <%= f.hidden_field :address %>
+    <%= f.hidden_field :total_payment, value: @total + @order.shipping_cost %>
+    <%= f.submit "注文を確定する", class: "col-sm-3 btn btn-success text-nowrap" %>
+  <% end %>
+  </div>
+</div>

@@ -1,12 +1,13 @@
 class Public::OrdersController < ApplicationController
   before_action :authenticate_customer!
-  
+
   def new
     @order = Order.new
     @order.customer_id = current_customer.id
   end
 
   def index
+
   end
 
   def show
@@ -24,21 +25,27 @@ class Public::OrdersController < ApplicationController
       @order.address = @address.address
       @order.name = @address.name
     elsif params[:order][:select_address] == "2"
-      @order = Order.new
-    else  
+      @order
+    else
       redirect_to new_orders_path
     end
     @cart_items = current_customer.cart_items.all
     @total = @cart_items.inject(0) { |sum, cart_item| sum + cart_item.subtotal }
   end
-  
+
   def complete
-    
+
   end
-  
+
   def confirmed
-    @order = Order.new(order_params)
-    @order.customer_id = current_customer.id
+    cart_items = current_customer.cart_items.all
+    @order = current_customer.orders.new(order_params)
+    if @order.save
+      cart_items.each do |cart_item|
+      
+    end
+      
+    end
   end
 
   private

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     registrations: "public/registrations",
     sessions: 'public/sessions'
   }
-  
+
   namespace :admin do
     root to: 'homes#top'
     resources :genres, only: [:index, :create, :edit, :update]
@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     resources :customers, only: [:index, :show, :edit, :update]
     resources :items, except: [:destroy]
   end
-  
+
   scope module: :public do
     root to: "homes#top"
     get "about" => "homes#about", as: "about"
@@ -26,15 +26,15 @@ Rails.application.routes.draw do
     get "customers/delete_confirm" => "customers#delete_confirm"
     patch "customers/delete" => "customers#delete_process"
     resources :addresses, except: [:new, :show]
-    resources :orders, only: [:new, :index, :show]
-    get "orders/confirm" => "orders#confirm"
+    post "orders/confirm" => "orders#confirm"
     get "orders/complete" => "orders#complete"
     post "orders/confirmed" => "orders#confirmed"
+    resources :orders, only: [:new, :index, :show]
     resources :items, only: [:index, :show]
     delete "cart_items/destroy_all" => "cart_items#destroy_all"
     resources :cart_items, only: [:index, :update, :create, :destroy]
   end
-  
-  
+
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
