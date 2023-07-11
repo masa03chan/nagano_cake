@@ -7,14 +7,19 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
-
+    @orders = Order.all
   end
 
   def show
+    @order = Order.find(params[:id])
+    @order_details = @order.order_details
   end
 
   def confirm
-    @order = Order.new(order_params)
+    @cart_items = current_customer.cart_items.all
+    @total = @cart_items.inject(0) { |sum, cart_item| sum + cart_item.subtotal }
+    @order = current_customer.orders.new(order_params)
+    @order.total_payment = @total
     if params[:order][:select_address] == "0"
       @order.postal_code = current_customer.postal_code
       @order.address = current_customer.address
@@ -25,27 +30,36 @@ class Public::OrdersController < ApplicationController
       @order.address = @address.address
       @order.name = @address.name
     elsif params[:order][:select_address] == "2"
-      @order
+      if @order.invalid?
+        render :new
+      end
     else
       redirect_to new_orders_path
     end
-    @cart_items = current_customer.cart_items.all
-    @total = @cart_items.inject(0) { |sum, cart_item| sum + cart_item.subtotal }
-  end
-
-  def complete
 
   end
 
   def confirmed
+    order = current_customer.orders.new(order_params)
+    order.save
+    if params[:order][:select_address] == "2"
+      address = current_customer.address.new
+      address.postal_code = order.postal_code
+      address.address = order.address
+      address.name = order.name
+      address.save
+    end
     cart_items = current_customer.cart_items.all
-    @order = current_customer.orders.new(order_params)
-    if @order.save
-      cart_items.each do |cart_item|
-      
+    cart_items.each do |cart_item|
+      order_detail = OrderDetail.new
+      order_detail.order_id = order.id
+      order_detail.item_id = cart_item.item.id
+      order_detail.amount = cart_item.amount
+      order_detail.price = cart_item.item.with_tax_price
+      order_detail.save
     end
-      
-    end
+    cart_items.destroy_all
+    redirect_to orders_complete_path
   end
 
   private
@@ -54,4 +68,7 @@ class Public::OrdersController < ApplicationController
     params.require(:order).permit(:postal_code, :address, :name, :shipping_cost, :total_payment, :payment_method, :status, :customer_id)
   end
 
+  def address_params
+    params.require(:order).permit(:name, :address, :postal_code)
+  end
 end
