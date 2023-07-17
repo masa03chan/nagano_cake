@@ -1,2 +1,35 @@
-<h1>Admin::Homes#top</h1>
-<p>Find me in app/views/admin/homes/top.html.erb</p>
+<div>
+  <%= flash[:notice] %>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-12 p-0">
+      <h5 class="d-inline-block bg-light col-2 text-center my-5 text-nowrap">注文履歴一覧</h5>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-sm-11 mx-auto">
+      <table class="table">
+        <thead class="thead-light">
+          <tr class="text-nowrap">
+            <th scope="col-sm-3">購入日時</th>
+            <th scope="col-sm-2">購入者</th>
+            <th scope="col-sm-2">注文個数</th>
+            <th scope="col-sm-2">注文ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr class="table">
+              <td class="col-sm-3"><%= link_to order.created_at.to_s(:datetime_jp), admin_order_path(order.customer.id) %></td>
+              <td class="col-sm-2 text-nowrap"><%= order.customer.full_name %></td>
+              <td class="col-sm-2"><%= @total %></td>
+              <td class="col-sm-2"><%= order.status_i18n %></td>
+            </tr>
+          <% end %>
+          <%= paginate @orders %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
