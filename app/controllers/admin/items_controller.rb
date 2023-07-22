@@ -1,6 +1,12 @@
 class Admin::ItemsController < ApplicationController
+  before_action :authenticate_admin!,only: [:create,:edit,:update,:index, :show, :new]
+
   def index
-    @items = Item.page(params[:page])
+    if params[:item_name]
+      @items = Item.page(params[:item_name][:page])
+    else
+      @items = Item.page(params[:page])
+    end
   end
 
   def show
@@ -33,7 +39,7 @@ class Admin::ItemsController < ApplicationController
       redirect_to admin_items_path
     else
       render :edit
-    end 
+    end
   end
 
   private

@@ -4,7 +4,11 @@
 <div class="container">
   <div class="row">
     <div class="col-12 p-0">
-      <h5 class="d-inline-block bg-light col-2 text-center my-5 text-nowrap">注文履歴一覧</h5>
+    <% if @customer.present? %>
+      <h5 class="d-inline-block bg-light col-sm-3 text-center my-5 text-nowrap"><%= @customer.full_name %>さんの注文履歴</h5>
+    <% else %>
+      <h5 class="d-inline-block bg-light col-sm-2 text-center my-5 text-nowrap">注文履歴一覧</h5>
+    <% end %>
     </div>
   </div>
   <div class="row justify-content-center">
@@ -13,7 +17,9 @@
         <thead class="thead-light">
           <tr class="text-nowrap">
             <th scope="col-sm-3">購入日時</th>
-            <th scope="col-sm-2">購入者</th>
+            <% if @customer.nil? %>
+              <th scope="col-sm-2">購入者</th>
+            <% end %>
             <th scope="col-sm-2">注文個数</th>
             <th scope="col-sm-2">注文ステータス</th>
           </tr>
@@ -21,8 +27,12 @@
         <tbody>
           <% @orders.each do |order| %>
             <tr class="table">
-              <td class="col-sm-3"><%= link_to order.created_at.to_s(:datetime_jp), admin_order_path(order.customer.id) %></td>
-              <td class="col-sm-2 text-nowrap"><%= order.customer.full_name %></td>
+              <td class="col-sm-3">
+                <%= link_to order.created_at.to_s(:datetime_jp), admin_order_path(order.customer.id), style: "text-decoration: underline; color: black;" %>
+              </td>
+              <% if @customer.nil? %>
+               <td class="col-sm-2 text-nowrap"><%= order.customer.full_name %></td>
+              <% end %>
               <td class="col-sm-2"><%= @total %></td>
               <td class="col-sm-2"><%= order.status_i18n %></td>
             </tr>

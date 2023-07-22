@@ -93,11 +93,10 @@
                 <% end %>
               </ul>
             </div>
-            <div class="input-group row justify-content-end ">
+            <div class="input-group row d-flex justify-content-end ">
               <% if customer_signed_in? %>
                 <div class="col-sm-3"><p class="text-left text-nowrap">ようこそ、<%= current_customer.last_name %>さん！</p></div>
               <% end %>
-              <div class="col"></div>
               <input type="form-control input-group-prepend col-sm-3 text-right" type="search" id="txt-search" placeholder="Search" aria-label="Search">
                 <span class="input-group-btn input-group-append">
                   <button type="submit" id="btn-search sbtn" class="btn btn-outline-secondary"><i class="fas fa-search"></i></button>
@@ -112,9 +111,9 @@
     <%= yield %>
     </main>
     <footer>
-      <div class="container mt-5 bg-light vh-100">
+      <div class="mt-5 bg-light vh-100">
         <div class="row mx-auto">
-          <div class="mx-auto">
+          <div class="mx-auto mt-2">
             <P>Copyright © Infratop Inc. All Rights Reserved.</P>
           </div>
         </div>
