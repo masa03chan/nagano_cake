@@ -5,6 +5,10 @@ class Public::ItemsController < ApplicationController
       @items = @genre.items.where(is_active: true).page(params[:page]).per(8)
       @genres = Genre.all
       @quantity = @genre.items.where(is_active: true).count
+    elsif params[:item_name]
+      @items = Item.where(is_active: true).page(params[:page]).per(8)
+      @genres = Genre.all
+      @quantity = Item.where(is_active: true).count
     else
       @items = Item.where(is_active: true).page(params[:page]).per(8)
       @genres = Genre.all
@@ -17,5 +21,5 @@ class Public::ItemsController < ApplicationController
     @genres = Genre.all
     @cart_item = CartItem.new
   end
-  
+
 end

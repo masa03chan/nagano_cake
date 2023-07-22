@@ -21,7 +21,7 @@
           </button>
           <div class="row">
             <div class="collapse navbar-collapse " id="navbarNavDropdown">
-              <ul class="navbar-nav ml-auto justify-content-end col-lg">
+              <ul class="navbar-nav ml-auto d-flex justify-content-end col-lg">
                 <% if customer_signed_in? %>
                   <li class="nav-link text-light">
                     <%= link_to customer_path, class: "header-button" do %>
@@ -93,15 +93,33 @@
                 <% end %>
               </ul>
             </div>
-            <div class="input-group row d-flex justify-content-end ">
+            <div class="row d-flex justify-content-end col-sm-12">
               <% if customer_signed_in? %>
                 <div class="col-sm-3"><p class="text-left text-nowrap">ようこそ、<%= current_customer.last_name %>さん！</p></div>
+                <div class="col-sm-9">
+                  <%= form_with model: @item, url: items_path, method: :get, local: true do |f| %>
+                    <div class="input-group">
+                      <%= f.text_field :item_name, class: "form-control" %>
+                      <span class="input-group-btn">
+                        <%= f.button type: "submit", class: "btn btn-outline-secondary" do %>
+                          <i class="fas fa-search"></i>
+                        <% end %>
+                      </span>
+                    </div>
+                  <% end %>
+                </div>
+              <% elsif admin_signed_in? %>
+                <%= form_with model: @item, url: admin_items_path, method: :get, local: true do |f| %>
+                  <div class="input-group">
+                    <%= f.text_field :item_name, class: "form-control" %>
+                    <span class="input-group-btn">
+                      <%= f.button type: "submit", class: "btn btn-outline-secondary" do %>
+                        <i class="fas fa-search"></i>
+                      <% end %>
+                    </span>
+                  </div>
+                <% end %>
               <% end %>
-              <input type="form-control input-group-prepend col-sm-3 text-right" type="search" id="txt-search" placeholder="Search" aria-label="Search">
-                <span class="input-group-btn input-group-append">
-                  <button type="submit" id="btn-search sbtn" class="btn btn-outline-secondary"><i class="fas fa-search"></i></button>
-                </span>
-              </input>
             </div>
           </div>
         </div>
