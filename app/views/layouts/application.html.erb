@@ -94,31 +94,33 @@
               </ul>
             </div>
             <div class="row d-flex justify-content-end col-sm-12">
-              <% if customer_signed_in? %>
+              <% if admin_signed_in? %>
+                <%= form_with url: admin_items_path, method: :get, local: true do |f| %>
+                  <div class="input-group">
+                    <%= f.text_field :item_name, value: "search",class: "form-control" %>
+                    <span class="input-group-btn">
+                      <%= button_tag type: "submit", class: "btn btn-outline-secondary" do %>
+                        <i class="fas fa-search"></i>
+                      <% end %>
+                    </span>
+                  </div>
+                <% end %>
+              <% else %>
                 <div class="col-sm-3"><p class="text-left text-nowrap">ようこそ、<%= current_customer.last_name %>さん！</p></div>
                 <div class="col-sm-9">
-                  <%= form_with model: @item, url: items_path, method: :get, local: true do |f| %>
+                  <%= form_with url: items_path, method: :get, local: true do |f| %>
                     <div class="input-group">
-                      <%= f.text_field :item_name, class: "form-control" %>
+                      <%= f.text_field :item_name, value: "search", class: "form-control" %>
+                      <%= f.select :range, options_for_select(['Item']) %>
+                      <%= f.select :search, options_for_select(["partial_match"]) %>
                       <span class="input-group-btn">
-                        <%= f.button type: "submit", class: "btn btn-outline-secondary" do %>
+                        <%= button_tag type: "submit", class: "btn btn-outline-secondary" do %>
                           <i class="fas fa-search"></i>
                         <% end %>
                       </span>
                     </div>
                   <% end %>
                 </div>
-              <% elsif admin_signed_in? %>
-                <%= form_with model: @item, url: admin_items_path, method: :get, local: true do |f| %>
-                  <div class="input-group">
-                    <%= f.text_field :item_name, class: "form-control" %>
-                    <span class="input-group-btn">
-                      <%= f.button type: "submit", class: "btn btn-outline-secondary" do %>
-                        <i class="fas fa-search"></i>
-                      <% end %>
-                    </span>
-                  </div>
-                <% end %>
               <% end %>
             </div>
           </div>

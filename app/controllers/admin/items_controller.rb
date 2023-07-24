@@ -1,9 +1,14 @@
 class Admin::ItemsController < ApplicationController
-  before_action :authenticate_admin!,only: [:create,:edit,:update,:index, :show, :new]
+  before_action :authenticate_admin!
+
+  def search
+    @range = params[:range]
+    @Item = Item.looks(params[:search], params[:item_name])
+  end
 
   def index
     if params[:item_name]
-      @items = Item.where('name LIKE(?)', "%#{item_name}%").page(params[:page])
+      @items = Item.where("name LIKE?","%#{item_name}%").page(params[:page])
     else
       @items = Item.page(params[:page])
     end
