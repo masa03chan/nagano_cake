@@ -1,0 +1,10 @@
+<%= search_form_for(q, url:admin_items_path) do |f| %>
+  <div class="input-group">
+    <%= f.text_field :name_cont, placeholder: "search", class: "form-control" %>
+    <span class="input-group-btn">
+      <%= button_tag type: "submit", class: "btn btn-outline-secondary" do %>
+        <i class="fas fa-search"></i>
+      <% end %>
+    </span>
+  </div>
+<% end %>

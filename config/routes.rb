@@ -14,8 +14,11 @@ Rails.application.routes.draw do
     resources :order_details, only: [:update]
     resources :orders, only: [:show, :update]
     resources :customers, only: [:index, :show, :edit, :update]
-    resources :items, except: [:destroy]
-    get "search" => "searches#search"
+    resources :items, except: [:destroy] do
+      collection do
+        get 'search'
+      end
+    end
   end
 
   scope module: :public do
@@ -31,10 +34,13 @@ Rails.application.routes.draw do
     get "orders/complete" => "orders#complete"
     post "orders/confirmed" => "orders#confirmed"
     resources :orders, only: [:new, :index, :show]
-    resources :items, only: [:index, :show]
+    resources :items, only: [:index, :show] do
+      collection do
+        get 'search'
+      end
+    end
     delete "cart_items/destroy_all" => "cart_items#destroy_all"
     resources :cart_items, only: [:index, :update, :create, :destroy]
-    get "search" => "searches#search"
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

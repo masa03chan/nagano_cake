@@ -1,14 +1,15 @@
 class Admin::ItemsController < ApplicationController
   before_action :authenticate_admin!
+  before_action :set_q, only: [:index, :search]
 
   def search
-    @range = params[:range]
-    @Item = Item.looks(params[:search], params[:item_name])
+    @results = @q.result
   end
 
   def index
-    if params[:item_name]
-      @items = Item.where("name LIKE?","%#{item_name}%").page(params[:page])
+    if params[:q]
+      @results = @q.result
+      @items = @q.result.page(params[:page])
     else
       @items = Item.page(params[:page])
     end
@@ -48,6 +49,10 @@ class Admin::ItemsController < ApplicationController
   end
 
   private
+
+  def set_q
+    @q = Item.ransack(params[:q])
+  end
 
   def item_params
     params.require(:item).permit(:image, :name, :introduction, :price, :genre_id, :is_active)

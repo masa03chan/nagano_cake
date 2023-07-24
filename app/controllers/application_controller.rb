@@ -1,5 +1,11 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_search
+
+  def set_search
+    @q = Item.ransack(params[:q])
+    @items = @q.result.where(is_active: true).page(params[:page]).per(8)
+  end
 
   def after_sign_in_path_for(resource)
     case resource
