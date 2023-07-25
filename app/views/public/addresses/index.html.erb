@@ -3,7 +3,7 @@
 </div>
 <div class="container">
   <div class="row">
-    <div class="col-12 p-0">
+    <div class="col-sm-12 p-0">
       <h5 class="d-inline-block bg-light col-2 text-center my-5 text-nowrap">配送先登録/一覧</h5>
     </div>
   </div>
@@ -21,10 +21,10 @@
     <div class="col-sm-12">
       <%= form_with model: @address, url: addresses_path do |f| %>
         <div class="form-group row justify-content-flex-start">
-          <div class="col-3 col-form-label">
+          <div class="col-sm-3 col-form-label">
             <%= f.label :postal_code, class: "text-nowrap" do %>郵便番号(ハイフンなし)<% end %>
           </div>
-          <div class="col-3 form-inline">
+          <div class="col-sm-3 form-inline">
             <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code", placeholder: "0000000", class: "form-control border border-secondary rounded" %>
           </div>
         </div>
@@ -45,8 +45,8 @@
             <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "令和道子", class: "form-control border border-secondary" %>
           </div>
           <div class="col-sm-4"></div>
-          <div class="actions col-2 col-form-label">
-            <%= f.submit "新規登録", class: "btn btn-success btn-block" %>
+          <div class="actions col-sm-2 col-form-label">
+            <%= f.submit "新規登録", class: "btn btn-success" %>
           </div>
         </div>
       <% end %>
@@ -81,6 +81,6 @@
     </div>
   </div>
   <% else %>
-    <p class="text-center">配送先が登録されていません。</p> 
+    <p class="text-center">配送先が登録されていません。</p>
   <% end %>
 </div>

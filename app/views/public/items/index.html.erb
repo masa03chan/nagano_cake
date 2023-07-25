@@ -2,15 +2,14 @@
   <%= flash[:notice] %>
 </div>
 <div class="container">
-  <div class="row">
+  <div class="row d-flex flex-row">
     <%= render "public/shared/genrebar", genres: @genres %>
-    <div class="col-1"></div>
-    <div class="col-9 p-0">
-      <h5 class="d-inline-block col-2 text-center my-5 text-nowrap">商品一覧<span>(全<%= @quantity %>件)</span></h5>
-      <div class="row">
-        <% if @items.present? %>  
+    <div class="col-sm-9 mx-auto justify-content-sm-start justify-content-center">
+      <h5 class="d-inline-block col-sm-2 text-center my-5 text-nowrap">商品一覧<span>(全<%= @quantity %>件)</span></h5>
+      <div class="row mx-auto">
+        <% if @items.present? %>
           <% @items.each do |item| %>
-            <div class="d-flex flex-column item-box mr-1", style="width: 180px;">
+            <div class="d-flex flex-column item-box mr-md-1 mr-0", style="width: 170px;">
               <%= link_to item_path(item.id) do %>
                 <%= image_tag item.get_image(370, 100) %>
               <% end %>
@@ -22,7 +21,7 @@
           <p>商品が見つかりませんでした。</p>
         <% end %>
       </div>
-      <%= paginate @items %>  
+      <%= paginate @items %>
     </div>
   </div>
 </div>

@@ -7,8 +7,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
-    @orders = Order.all
-    @order_details = OrderDetail.all
+    @orders = current_customer.orders
   end
 
   def show
@@ -24,7 +23,7 @@ class Public::OrdersController < ApplicationController
     if params[:order][:select_address] == "0"
       @order.postal_code = current_customer.postal_code
       @order.address = current_customer.address
-      @order.name = current_customer.first_name + current_customer.last_name
+      @order.name = current_customer.last_name + current_customer.first_name
     elsif params[:order][:select_address] == "1"
       @address = Address.find(params[:order][:address_id])
       @order.postal_code = @address.postal_code
@@ -37,7 +36,6 @@ class Public::OrdersController < ApplicationController
     else
       redirect_to new_orders_path
     end
-
   end
 
   def confirmed
@@ -63,7 +61,7 @@ class Public::OrdersController < ApplicationController
     redirect_to orders_complete_path
   end
 
-  private
+private
 
   def order_params
     params.require(:order).permit(:postal_code, :address, :name, :shipping_cost, :total_payment, :payment_method, :status, :customer_id)

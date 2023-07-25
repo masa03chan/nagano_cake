@@ -1,119 +1,119 @@
 <div class="container">
   <div class="row">
-    <div class="col-12">
+    <div class="col-sm-12">
       <h5 class="d-inline-block bg-light col-3 my-4 text-center text-nowrap">新規会員登録</h5>
     </div>
   </div>
   <div class="row justify-content-around">
-    <div class="col-sm-12 p-0">
+    <div class="col-sm-12">
       <%= form_with model: @customer, url: customer_registration_path do |f| %>
       <%= render "public/shared/error_messages", resource: resource %>
         <div class="form-group row">
-          <div class="col-3 form-inline">
+          <div class="col-sm-3 form-inline">
             <label for="name">名前</label>
           </div>
           <%= f.label :last_name, class: "mr-4" do %>(姓) <% end %>
-          <div class="col-3 mr-4">
+          <div class="col-sm-3 mr-4">
             <%= f.text_field :last_name, autofocus: true, autocomplete: "first_name", placeholder: "令和", class: "form-control border border-secondary rounded" %>
           </div>
           <%= f.label :first_name, class: "mr-4" do %>(名) <% end %>
-          <div class="col-3">
+          <div class="col-sm-3">
             <%= f.text_field :first_name, autofocus: true, autocomplete: "last_name", placeholder: "道子", class: "form-control border border-secondary rounded" %>
           </div>
         </div>
-        
+
         <div class="form-group row">
-          <div class="col-3 form-inline">
+          <div class="col-sm-3 form-inline">
             <label for="name">フリガナ</label>
           </div>
             <%= f.label :last_name_kana, class: "mr-2" do %>(セイ)<% end %>
-          <div class="col-3 mr-4">
+          <div class="col-sm-3 mr-4">
             <%= f.text_field :last_name_kana, autofocus: true, autocomplete: "first_name", placeholder: "レイワ", class: "form-control border border-secondary rounded" %>
           </div>
           <%= f.label :first_name_kana, class: "mr-2" do %>(メイ)<% end %>
-          <div class="col-3">
+          <div class="col-sm-3">
             <%= f.text_field :first_name_kana, autofocus: true, autocomplete: "last_name", placeholder: "ミチコ", class: "form-control border border-secondary rounded" %>
           </div>
         </div>
-        
+
         <div class="form-group row">
-          <div class="col-3 col-form-label">
+          <div class="col-sm-3 col-form-label">
             <%= f.label :email, class: "text-nowrap" do %>メールアドレス<% end %>
           </div>
           <div class="mr-5"></div>
-          <div class="col-3">
+          <div class="col-sm-3">
             <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com", class: "form-control border border-secondary rounded" %>
           </div>
         </div>
-        
+
         <div class="form-group row">
-          <div class="col-3 col-form-label">
+          <div class="col-sm-3 col-form-label">
             <%= f.label :postal_code, class: "text-nowrap" do %>郵便番号(ハイフンなし)<% end %>
           </div>
           <div class="mr-5"></div>
-          <div class="col-3">
+          <div class="col-sm-3">
             <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code", placeholder: "0000000", class: "form-control border border-secondary rounded" %>
           </div>
         </div>
-        
+
         <div class="form-group row">
-          <div class="col-3 col-form-label">
+          <div class="col-sm-3 col-form-label">
             <%= f.label :address do %>住所<% end %>
           </div>
           <div class="mr-5"></div>
-          <div class="col-7">
+          <div class="col-sm-7">
             <%= f.text_field :address, autofocus: true, autocomplete: "address", placeholder: "東京都渋谷区代々木神園町0-0", class: "form-control border border-secondary rounded" %>
           </div>
         </div>
-        
+
         <div class="form-group row">
-          <div class="col-3 col-form-label">
+          <div class="col-sm-3 col-form-label">
             <%= f.label :telephone_number, class: "text-nowrap" do %>電話番号(ハイフンなし)<% end %>
           </div>
           <div class="mr-5"></div>
-          <div class="col-3">
+          <div class="col-sm-3">
             <%= f.text_field :telephone_number, autofocus: true, autocomplete: "telephone_number", placeholder: "00000000000", class: "form-control border border-secondary rounded" %>
           </div>
         </div>
-        
+
         <div class="form-group row">
-          <div class="col-3 col-form-label text-nowrap">
+          <div class="col-sm-3 col-form-label text-nowrap">
             <%= f.label :password do %>パスワード<% end %>
             <% if @minimum_password_length %>
             <rem>(<%= @minimum_password_length %> 文字以上)</rem>
             <% end %>
           </div>
           <div class="mr-5"></div>
-          <div class="col-3">
+          <div class="col-sm-3">
             <%= f.password_field :password, class: "form-control border border-secondary rounded" %>
           </div>
-        </div>  
-        
+        </div>
+
         <div class="form-group row">
-          <div class="col-3 col-form-label">
+          <div class="col-sm-3 col-form-label">
             <%= f.label :password_confirmation, class: "text-nowrap" do %>パスワード(確認用)<% end %>
           </div>
           <div class="mr-5"></div>
-          <div class="col-3 col-form-label">
+          <div class="col-sm-3 col-form-label">
               <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control border border-secondary rounded" %>
           </div>
         </div>
-        
+
         <div class="form-group row">
-          <div class="col-3"></div>
+          <div class="col-sm-3"></div>
           <div class="mr-5"></div>
-          <div class="actions col-3  col-form-label">
-            <%= f.submit "新規登録", class: "btn btn-success btn-block" %>
+          <div class="actions col-sm-3  col-form-label">
+            <%= f.submit "新規登録", class: "btn btn-success" %>
           </div>
         </div>
       <% end %>
     </div>
   </div>
   <div class="row">
-    <div class="col-12">
-      <h5 class="d-inline-block bg-light col-3 my-4 text-center text-nowrap">既に登録済みの方</h5>
-      <div class="col-2"></div>
-      <div class="col-6 text-nowrap ">
+    <div class="col-sm-12">
+      <h5 class="d-inline-block bg-light col-sm-3 my-4 text-center text-nowrap">既に登録済みの方</h5>
+      <div class="col-sm-2"></div>
+      <div class="col-sm-6 text-nowrap ">
         <p>
           <%= link_to new_customer_session_path, class: "text-underline-primary" do %>こちら<% end %>
         からログインしてください。

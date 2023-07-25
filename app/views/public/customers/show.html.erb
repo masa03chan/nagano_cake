@@ -3,7 +3,7 @@
 </div>
 <div class="container">
   <div class="row">
-    <div class="col-12 p-0">
+    <div class="col-sm-12 p-0">
       <h5 class="d-inline-block bg-light col-2 text-center my-4 text-nowrap">マイページ</h5>
     </div>
   </div>
@@ -12,31 +12,31 @@
     <%= link_to edit_public_customer_path ,class: "col-sm-3 btn btn-success text-nowrap", role: "button" do %>編集する<% end %>
   </div>
   <div class="row">
-    <div class="col-6">
+    <div class="col-sm-6">
       <table class="table table-border">
           <tbody>
             <tr>
-              <td class="col-2 bg-light">氏名</td>
-              <td class="col-4"><%= @customer.last_name %>　<%= @customer.first_name %></td>
+              <td class="col-sm-2 bg-light">氏名</td>
+              <td class="col-sm-4"><%= @customer.last_name %>　<%= @customer.first_name %></td>
             </tr>
             <tr>
-              <td class="col-2 bg-light">カナ</td>
-              <td class="col-4"><%= @customer.last_name_kana %> <%= @customer.first_name_kana %></td>
+              <td class="col-sm-2 bg-light">カナ</td>
+              <td class="col-sm-4"><%= @customer.last_name_kana %> <%= @customer.first_name_kana %></td>
             </tr>
-              <td class="col-2 bg-light">郵便番号</td>
-              <td class="col-4"><%= @customer.postal_code %></td>
-            </tr>
-            </tr>
-              <td class="col-2 bg-light">住所</td>
-              <td class="col-4"><%= @customer.address %></td>
+              <td class="col-sm-2 bg-light">郵便番号</td>
+              <td class="col-sm-4"><%= @customer.postal_code %></td>
             </tr>
             </tr>
-              <td class="col-2 bg-light">電話番号</td>
-              <td class="col-4"><%= @customer.telephone_number %></td>
+              <td class="col-sm-2 bg-light">住所</td>
+              <td class="col-sm-4"><%= @customer.address %></td>
             </tr>
             </tr>
-              <td class="col-2 bg-light text-nowrap">メールアドレス</td>
-              <td class="col-4"><%= @customer.email %></td>
+              <td class="col-sm-2 bg-light">電話番号</td>
+              <td class="col-sm-4"><%= @customer.telephone_number %></td>
+            </tr>
+            </tr>
+              <td class="col-sm-2 bg-light text-nowrap">メールアドレス</td>
+              <td class="col-sm-4"><%= @customer.email %></td>
             </tr>
           </tbody>
       </table>

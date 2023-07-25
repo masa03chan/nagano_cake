@@ -28,12 +28,12 @@
           <% @orders.each do |order| %>
             <tr class="table">
               <td class="col-sm-3">
-                <%= link_to order.created_at.to_s(:datetime_jp), admin_order_path(order.customer.id), style: "text-decoration: underline; color: black;" %>
+                <%= link_to order.created_at.strftime('%Y/%m/%d %H:%M:%S'), admin_order_path(order.id), style: "text-decoration: underline; color: black;" %>
               </td>
               <% if @customer.nil? %>
                <td class="col-sm-2 text-nowrap"><%= order.customer.full_name %></td>
               <% end %>
-              <td class="col-sm-2"><%= @total %></td>
+              <td class="col-sm-2"><%= order.order_details.sum(:amount) %></td>
               <td class="col-sm-2"><%= order.status_i18n %></td>
             </tr>
           <% end %>

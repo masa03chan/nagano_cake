@@ -21,12 +21,12 @@ class Public::CustomersController < ApplicationController
     @customer = Customer.find(current_customer.id)
   end
 
-  def delete
-    @customer = Customer.find_by(email: params[:customer][:email])
-    @customer.update(is_valid: true)
+  def delete_process
+    @customer = Customer.find(current_customer.id)
+    @customer.update(is_deleted: true)
     reset_session
     flash[:notice] = "退会処理を実行いたしました。"
-    redirect_to public_root_path
+    redirect_to root_path
   end
 
 
